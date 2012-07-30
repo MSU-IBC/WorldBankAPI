@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.25, 11.125" name="WorldBank">
+  <DataContextMoniker Name="/WorldBankDataContext" />
+  <nestedChildShapes>
+    <classShape Id="d3916805-fa0b-4345-93ca-b2a695525c2e" absoluteBounds="3.5, 6.625, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/WorldBankDataContext/DIBS_Availability" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0d65784a-f8d5-481e-901d-e3cba953a6b6" absoluteBounds="3.515, 7.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c1ca00e9-8c0b-44fa-b150-e1f8ad76c5c0" absoluteBounds="0.75, 3.625, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/WorldBankDataContext/DIBS_Category" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ccc97573-7b71-4b9d-be46-8b32081601ee" absoluteBounds="0.765, 4.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a1f72eb4-18cf-44b5-9f2c-cf71243396dc" absoluteBounds="0.75, 6.625, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/WorldBankDataContext/DIBS_Source" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ee0165b-a983-4818-bff5-47ef952ba4bc" absoluteBounds="0.765, 7.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1ecaa65b-bf44-4aea-84cd-569219ed71ad" absoluteBounds="0.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/WorldBankDataContext/DIBS_Unit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3c65211a-0e4e-4158-99ea-8769fc7a222d" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="462d6cc2-ec64-4dfc-bdf3-ef3b48471080" absoluteBounds="8.75, 9.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/WorldBankDataContext/Tag" />
+      <nestedChildShapes>
+        <elementListCompartment Id="488e3871-0392-4715-9301-e9ee1fcc5464" absoluteBounds="8.765, 9.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2539c39a-d7cd-4a77-a5b7-df3ca4882288" absoluteBounds="12, 1.875, 2, 6.5784326171875">
+      <DataClassMoniker Name="/WorldBankDataContext/Country" />
+      <nestedChildShapes>
+        <elementListCompartment Id="18e61714-01e2-4ec5-8dc6-360455b1c049" absoluteBounds="12.015, 2.335, 1.9700000000000002, 6.0184326171875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.125 : 9.5); (9.125 : 6.3020654296875); (12 : 6.3020654296875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WorldBankDataContext/Tag/Tag_Country" />
+      <nodes>
+        <classShapeMoniker Id="462d6cc2-ec64-4dfc-bdf3-ef3b48471080" />
+        <classShapeMoniker Id="2539c39a-d7cd-4a77-a5b7-df3ca4882288" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9bbd274b-98f1-4e31-8d80-de8ee49e61fc" absoluteBounds="5.875, 1.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/WorldBankDataContext/DIBS_Field" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2202a6fc-ea94-4829-b05c-59e604facee6" absoluteBounds="5.89, 2.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.05370198567708); (3.04166666666667 : 4.05370198567708 : JumpStart); (3.20833333333333 : 4.05370198567708 : JumpEnd); (5.875 : 4.05370198567708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WorldBankDataContext/DIBS_Category/DIBS_Category_DIBS_Field" />
+      <nodes>
+        <classShapeMoniker Id="c1ca00e9-8c0b-44fa-b150-e1f8ad76c5c0" />
+        <classShapeMoniker Id="9bbd274b-98f1-4e31-8d80-de8ee49e61fc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.625); (3.125 : 6.25); (3.125 : 2.87059899283854); (5.875 : 2.87059899283854)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WorldBankDataContext/DIBS_Source/DIBS_Source_DIBS_Field" />
+      <nodes>
+        <classShapeMoniker Id="a1f72eb4-18cf-44b5-9f2c-cf71243396dc" />
+        <classShapeMoniker Id="9bbd274b-98f1-4e31-8d80-de8ee49e61fc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.94314697265625); (5.875 : 1.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WorldBankDataContext/DIBS_Unit/DIBS_Unit_DIBS_Field" />
+      <nodes>
+        <classShapeMoniker Id="1ecaa65b-bf44-4aea-84cd-569219ed71ad" />
+        <classShapeMoniker Id="9bbd274b-98f1-4e31-8d80-de8ee49e61fc" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="5a4241b9-bebd-407d-aaf0-84de676b5048" absoluteBounds="6.75, 5.75, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/WorldBankDataContext/DIBS_FieldsAvailability" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d14cc08b-9fc6-41a1-b01c-7ca0efef813f" absoluteBounds="6.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 6.78449625651042); (6.75 : 6.78449625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WorldBankDataContext/DIBS_Availability/DIBS_Availability_DIBS_FieldsAvailability" />
+      <nodes>
+        <classShapeMoniker Id="d3916805-fa0b-4345-93ca-b2a695525c2e" />
+        <classShapeMoniker Id="5a4241b9-bebd-407d-aaf0-84de676b5048" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.3125 : 4.48240397135417); (7.3125 : 5.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WorldBankDataContext/DIBS_Field/DIBS_Field_DIBS_FieldsAvailability" />
+      <nodes>
+        <classShapeMoniker Id="9bbd274b-98f1-4e31-8d80-de8ee49e61fc" />
+        <classShapeMoniker Id="5a4241b9-bebd-407d-aaf0-84de676b5048" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="04a63606-4ed5-45e3-97d7-ca98b588394b" absoluteBounds="9.5, 2.125, 2, 1.9631982421875">
+      <DataClassMoniker Name="/WorldBankDataContext/DIBS_Data" />
+      <nestedChildShapes>
+        <elementListCompartment Id="69344d36-4c8a-4439-9399-996e4f5c8631" absoluteBounds="9.515, 2.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12 : 3.10659912109375); (11.5 : 3.10659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WorldBankDataContext/Country/Country_DIBS_Data" />
+      <nodes>
+        <classShapeMoniker Id="2539c39a-d7cd-4a77-a5b7-df3ca4882288" />
+        <classShapeMoniker Id="04a63606-4ed5-45e3-97d7-ca98b588394b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.875 : 3.10659912109375); (9.5 : 3.10659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WorldBankDataContext/DIBS_Field/DIBS_Field_DIBS_Data" />
+      <nodes>
+        <classShapeMoniker Id="9bbd274b-98f1-4e31-8d80-de8ee49e61fc" />
+        <classShapeMoniker Id="04a63606-4ed5-45e3-97d7-ca98b588394b" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

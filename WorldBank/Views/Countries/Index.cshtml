@@ -1,0 +1,10 @@
+﻿@model IEnumerable<WorldBank.Models.Countries>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Update Countries</h2>
+
+@foreach (var i in Model) { 
+    <p>Not updated: @i.name === @i.iso2code</p>
+}

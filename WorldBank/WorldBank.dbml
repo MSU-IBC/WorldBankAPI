@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GLOBALEDGE_MVC" Class="WorldBankDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DB3;Initial Catalog=GLOBALEDGE_MVC;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GLOBALEDGE_MVCConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.DIBS_Availabilities" Member="DIBS_Availabilities">
+    <Type Name="DIBS_Availability">
+      <Column Name="AvailabilityID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(8000) NOT NULL" CanBeNull="false" />
+      <Association Name="DIBS_Availability_DIBS_FieldsAvailability" Member="DIBS_FieldsAvailabilities" ThisKey="AvailabilityID" OtherKey="AvailabilityID" Type="DIBS_FieldsAvailability" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DIBS_Categories" Member="DIBS_Categories">
+    <Type Name="DIBS_Category">
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="DIBS_Category_DIBS_Field" Member="DIBS_Fields" ThisKey="CategoryID" OtherKey="CategoryID" Type="DIBS_Field" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DIBS_Sources" Member="DIBS_Sources">
+    <Type Name="DIBS_Source">
+      <Column Name="SourceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="DIBS_Source_DIBS_Field" Member="DIBS_Fields" ThisKey="SourceID" OtherKey="SourceID" Type="DIBS_Field" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DIBS_Units" Member="DIBS_Units">
+    <Type Name="DIBS_Unit">
+      <Column Name="UnitID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Association Name="DIBS_Unit_DIBS_Field" Member="DIBS_Fields" ThisKey="UnitID" OtherKey="UnitID" Type="DIBS_Field" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tags" Member="Tags">
+    <Type Name="Tag">
+      <Column Name="TagID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Tag_Country" Member="Countries" ThisKey="TagID" OtherKey="TagID" Type="Country" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Country" Member="Countries">
+    <Type Name="Country">
+      <Column Name="CountryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TagID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Abbr" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="NameCIA" Type="System.String" DbType="VarChar(75) NOT NULL" CanBeNull="false" />
+      <Column Name="IntroShort" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IntroLong" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="People" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Economy" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Government" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Capital" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CurrencyCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CallingCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Voltage" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ChiefOfState" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="HeadOfGov" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="USEmbassy" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="googleLocation" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Zoom" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MainLanguages" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="MainReligions" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="FlagURL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="MapURL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="MainCities" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="StockExchanges" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MajorIndustries" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FusionMapsID" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="iso2code" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="LastReviewed" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Country_DIBS_Data" Member="DIBS_Datas" ThisKey="CountryID" OtherKey="CountryID" Type="DIBS_Data" />
+      <Association Name="Tag_Country" Member="Tag" ThisKey="TagID" OtherKey="TagID" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DIBS_Fields" Member="DIBS_Fields">
+    <Type Name="DIBS_Field">
+      <Column Name="FieldID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(4000) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SourceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FieldNumeric" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FieldText" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DateFieldUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateDataUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="DIBS_Field_DIBS_FieldsAvailability" Member="DIBS_FieldsAvailabilities" ThisKey="FieldID" OtherKey="FieldID" Type="DIBS_FieldsAvailability" />
+      <Association Name="DIBS_Field_DIBS_Data" Member="DIBS_Datas" ThisKey="FieldID" OtherKey="FieldID" Type="DIBS_Data" />
+      <Association Name="DIBS_Category_DIBS_Field" Member="DIBS_Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="DIBS_Category" IsForeignKey="true" />
+      <Association Name="DIBS_Source_DIBS_Field" Member="DIBS_Source" ThisKey="SourceID" OtherKey="SourceID" Type="DIBS_Source" IsForeignKey="true" />
+      <Association Name="DIBS_Unit_DIBS_Field" Member="DIBS_Unit" ThisKey="UnitID" OtherKey="UnitID" Type="DIBS_Unit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DIBS_FieldsAvailabilities" Member="DIBS_FieldsAvailabilities">
+    <Type Name="DIBS_FieldsAvailability">
+      <Column Name="FieldID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AvailabilityID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="DIBS_Availability_DIBS_FieldsAvailability" Member="DIBS_Availability" ThisKey="AvailabilityID" OtherKey="AvailabilityID" Type="DIBS_Availability" IsForeignKey="true" />
+      <Association Name="DIBS_Field_DIBS_FieldsAvailability" Member="DIBS_Field" ThisKey="FieldID" OtherKey="FieldID" Type="DIBS_Field" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DIBS_Data" Member="DIBS_Datas">
+    <Type Name="DIBS_Data">
+      <Column Name="Value" Type="System.Decimal" DbType="Decimal(28,8) NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FieldID" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CountryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateAdded" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Country_DIBS_Data" Member="Country" ThisKey="CountryID" OtherKey="CountryID" Type="Country" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="DIBS_Field_DIBS_Data" Member="DIBS_Field" ThisKey="FieldID" OtherKey="FieldID" Type="DIBS_Field" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>

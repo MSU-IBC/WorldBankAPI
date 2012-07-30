@@ -1,0 +1,86 @@
+﻿@model IEnumerable<WorldBank.DIBS_Field>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<h3><a href="#" id="autoUpdate">Auto-Update</a></h3>
+<div id="counter"></div>
+<table>
+<thead>
+    <tr><th>Field ID</th><th>Name</th><th>Date Data Was Updated</th><th>Update</th><th>Status</th></tr>
+</thead>
+<tbody>
+@foreach (var i in Model.OrderBy(a=>a.DateDataUpdated)) { 
+    <tr><td>@i.FieldID.Replace('.', '~')</td><td>@i.Name</td><td>@i.DateDataUpdated</td><td><button type="button" class="updateBtn">Update</button></td><td><span class="loading"></span></td></tr>
+}
+</tbody>
+</table>
+<div id="loadingDiv"><img src="/content/ajax-loader.gif" alt="Loading" title="Loading"/></div>
+
+<script type="text/javascript">
+    var counter = 0;
+    var MAX_SYNC = 3;
+    $('#loadingDiv').hide();
+
+    $('#autoUpdate').click(function (ev) {
+
+        var btn = $('button.updateBtn');
+        btn.attr('disabled', 'disabled');
+        btn.unbind('click', ajaxHandler);
+        ev.preventDefault();
+        var l = btn.length;
+        for (var i = counter; i < MAX_SYNC; i++) {
+            makeTheCall($(btn[i]));
+        }
+
+        function checkSync() {
+            $('#counter').html(counter + "----" + new Date().toLocaleTimeString());
+            if (i - 1 >= l) {
+                clearInterval(interval);
+            }
+            if (counter < MAX_SYNC) {
+                makeTheCall($(btn[i]));
+                i++;
+            }
+        }
+
+        var interval = setInterval(checkSync, 1000);
+    });
+
+
+    function makeTheCall(context) {
+        //
+        $.ajax({ url: '/indicators/update/' + $(context).parent().siblings().first().html(), context: $(context), dataType: 'json', beforeSend: function () {
+            $('#loadingDiv img').clone().appendTo($(context).parent().next());
+            counter++;
+
+        }, success: function (data) {
+            $(context).parent().next().html(data.msg);
+
+        }, complete: function (jqXHR, textStatus) {
+            if (textStatus != 'success') {
+                $(context).parent().next().html(textStatus);
+            }
+            if (counter == MAX_SYNC) {
+                $('button.updateBtn').bind('click', ajaxHandler);
+                $('button.updateBtn').unbind('click', noMore);
+            }
+            counter--;
+        }
+        });
+    }
+
+    var ajaxHandler = function () {
+        this.disabled = true;
+        makeTheCall(this);
+    };
+
+    var noMore = function () {
+        alert('Please wait...only ' + MAX_SYNC + ' connections at a time');
+    }
+
+    $('button.updateBtn').bind('click', ajaxHandler);
+    
+</script>

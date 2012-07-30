@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WorldBank.Models.IndicatorData>
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update</h2>
+
+@foreach (var i in Model) { 
+
+    <p>@i.value</p>
+}

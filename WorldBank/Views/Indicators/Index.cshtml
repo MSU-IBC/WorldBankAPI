@@ -1,0 +1,10 @@
+﻿@model IEnumerable<WorldBank.Models.Indicators>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@foreach (var i in Model) { 
+<p>@i.id ==> @i.sourceNote</p>
+}
