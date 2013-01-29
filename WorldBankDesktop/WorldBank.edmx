@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GLOBALEDGE_MVCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="GLOBALEDGE_MVCModelStoreContainer">
+          <EntitySet Name="DIBS_Fields" EntityType="GLOBALEDGE_MVCModel.Store.DIBS_Fields" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DIBS_Units" EntityType="GLOBALEDGE_MVCModel.Store.DIBS_Units" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_DIBS_Fields_DIBS_Units" Association="GLOBALEDGE_MVCModel.Store.FK_DIBS_Fields_DIBS_Units">
+            <End Role="DIBS_Units" EntitySet="DIBS_Units" />
+            <End Role="DIBS_Fields" EntitySet="DIBS_Fields" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DIBS_Fields">
+          <Key>
+            <PropertyRef Name="FieldID" />
+          </Key>
+          <Property Name="FieldID" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" />
+          <Property Name="UnitID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="SourceID" Type="int" Nullable="false" />
+          <Property Name="FieldNumeric" Type="bit" Nullable="false" />
+          <Property Name="FieldText" Type="bit" Nullable="false" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="DateFieldUpdated" Type="datetime" />
+          <Property Name="DateDataUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DIBS_Units">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Unit" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="Description" Type="nvarchar" />
+        </EntityType>
+        <Association Name="FK_DIBS_Fields_DIBS_Units">
+          <End Role="DIBS_Units" Type="GLOBALEDGE_MVCModel.Store.DIBS_Units" Multiplicity="1" />
+          <End Role="DIBS_Fields" Type="GLOBALEDGE_MVCModel.Store.DIBS_Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIBS_Units">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="DIBS_Fields">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DIBS_Field_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FieldID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UnitID" Type="int" Mode="In" />
+          <Parameter Name="CategoryID" Type="int" Mode="In" />
+          <Parameter Name="SourceID" Type="int" Mode="In" />
+          <Parameter Name="FieldNumeric" Type="bit" Mode="In" />
+          <Parameter Name="FieldText" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="DIBS_Insert_Unit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Unit" Type="nvarchar" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GLOBALEDGE_MVCModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GLOBALEDGE_MVCEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="DIBS_Fields" EntityType="GLOBALEDGE_MVCModel.DIBS_Fields" />
+          <EntitySet Name="DIBS_Units" EntityType="GLOBALEDGE_MVCModel.DIBS_Units" />
+          <AssociationSet Name="FK_DIBS_Fields_DIBS_Units" Association="GLOBALEDGE_MVCModel.FK_DIBS_Fields_DIBS_Units">
+            <End Role="DIBS_Units" EntitySet="DIBS_Units" />
+            <End Role="DIBS_Fields" EntitySet="DIBS_Fields" />
+          </AssociationSet>
+          <FunctionImport Name="DIBS_Field_Insert">
+            <Parameter Name="FieldID" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UnitID" Mode="In" Type="Int32" />
+            <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+            <Parameter Name="SourceID" Mode="In" Type="Int32" />
+            <Parameter Name="FieldNumeric" Mode="In" Type="Boolean" />
+            <Parameter Name="FieldText" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="DIBS_Insert_Unit" ReturnType="Collection(GLOBALEDGE_MVCModel.DIBS_Insert_Unit_Result)">
+            <Parameter Name="Unit" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="DIBS_Fields">
+          <Key>
+            <PropertyRef Name="FieldID" />
+          </Key>
+          <Property Name="FieldID" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="SourceID" Type="Int32" Nullable="false" />
+          <Property Name="FieldNumeric" Type="Boolean" Nullable="false" />
+          <Property Name="FieldText" Type="Boolean" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="DateFieldUpdated" Type="DateTime" Precision="3" />
+          <Property Name="DateDataUpdated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DIBS_Units" Relationship="GLOBALEDGE_MVCModel.FK_DIBS_Fields_DIBS_Units" FromRole="DIBS_Fields" ToRole="DIBS_Units" />
+        </EntityType>
+        <EntityType Name="DIBS_Units">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="DIBS_Fields" Relationship="GLOBALEDGE_MVCModel.FK_DIBS_Fields_DIBS_Units" FromRole="DIBS_Units" ToRole="DIBS_Fields" />
+        </EntityType>
+        <Association Name="FK_DIBS_Fields_DIBS_Units">
+          <End Role="DIBS_Units" Type="GLOBALEDGE_MVCModel.DIBS_Units" Multiplicity="1" />
+          <End Role="DIBS_Fields" Type="GLOBALEDGE_MVCModel.DIBS_Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIBS_Units">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="DIBS_Fields">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="DIBS_Insert_Unit_Result">
+          <Property Type="Int32" Name="UnitID" Nullable="false" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GLOBALEDGE_MVCModelStoreContainer" CdmEntityContainer="GLOBALEDGE_MVCEntities">
+          <EntitySetMapping Name="DIBS_Fields">
+            <EntityTypeMapping TypeName="GLOBALEDGE_MVCModel.DIBS_Fields">
+              <MappingFragment StoreEntitySet="DIBS_Fields">
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+                <ScalarProperty Name="FieldNumeric" ColumnName="FieldNumeric" />
+                <ScalarProperty Name="FieldText" ColumnName="FieldText" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="DateFieldUpdated" ColumnName="DateFieldUpdated" />
+                <ScalarProperty Name="DateDataUpdated" ColumnName="DateDataUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIBS_Units">
+            <EntityTypeMapping TypeName="GLOBALEDGE_MVCModel.DIBS_Units">
+              <MappingFragment StoreEntitySet="DIBS_Units">
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DIBS_Field_Insert" FunctionName="GLOBALEDGE_MVCModel.Store.DIBS_Field_Insert" />
+          <FunctionImportMapping FunctionImportName="DIBS_Insert_Unit" FunctionName="GLOBALEDGE_MVCModel.Store.DIBS_Insert_Unit">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GLOBALEDGE_MVCModel.DIBS_Insert_Unit_Result">
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
