@@ -4,22 +4,49 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GLOBALEDGE_MVCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="GLOBALEDGE_MVCModelStoreContainer">
-          <EntitySet Name="DIBS_Fields" EntityType="GLOBALEDGE_MVCModel.Store.DIBS_Fields" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DIBS_Units" EntityType="GLOBALEDGE_MVCModel.Store.DIBS_Units" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_DIBS_Fields_DIBS_Units" Association="GLOBALEDGE_MVCModel.Store.FK_DIBS_Fields_DIBS_Units">
-            <End Role="DIBS_Units" EntitySet="DIBS_Units" />
-            <End Role="DIBS_Fields" EntitySet="DIBS_Fields" />
-          </AssociationSet>
-        </EntityContainer>
+    <Schema Namespace="GLOBALEDGE_MVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="TagID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="Abbr" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NameCIA" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="IntroShort" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IntroLong" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="History" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Economy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Government" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Capital" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Capital_Lat" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="Capital_Long" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="Currency" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CurrencyCode" Type="varchar" MaxLength="10" />
+          <Property Name="CallingCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Voltage" Type="varchar" MaxLength="20" />
+          <Property Name="ChiefOfState" Type="varchar" MaxLength="400" />
+          <Property Name="HeadOfGov" Type="varchar" MaxLength="400" />
+          <Property Name="USEmbassy" Type="varchar" MaxLength="1000" />
+          <Property Name="MainLanguages" Type="varchar" MaxLength="1000" />
+          <Property Name="MainReligions" Type="varchar" MaxLength="1000" />
+          <Property Name="zoom" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="zoom_x" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="zoom_y" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="iso2code" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="LastReviewed" Type="datetime" Nullable="false" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="Unrest" Type="nvarchar(max)" />
+          <Property Name="UnrestApproved" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="DIBS_Fields">
           <Key>
             <PropertyRef Name="FieldID" />
           </Key>
-          <Property Name="FieldID" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" />
+          <Property Name="FieldID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="UnitID" Type="int" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="SourceID" Type="int" Nullable="false" />
@@ -33,13 +60,13 @@
           <Key>
             <PropertyRef Name="UnitID" />
           </Key>
-          <Property Name="UnitID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Unit" Type="nvarchar" Nullable="false" MaxLength="1000" />
-          <Property Name="Description" Type="nvarchar" />
+          <Property Name="UnitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <Association Name="FK_DIBS_Fields_DIBS_Units">
-          <End Role="DIBS_Units" Type="GLOBALEDGE_MVCModel.Store.DIBS_Units" Multiplicity="1" />
-          <End Role="DIBS_Fields" Type="GLOBALEDGE_MVCModel.Store.DIBS_Fields" Multiplicity="*" />
+          <End Role="DIBS_Units" Type="Self.DIBS_Units" Multiplicity="1" />
+          <End Role="DIBS_Fields" Type="Self.DIBS_Fields" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DIBS_Units">
               <PropertyRef Name="UnitID" />
@@ -59,11 +86,25 @@
           <Parameter Name="FieldNumeric" Type="bit" Mode="In" />
           <Parameter Name="FieldText" Type="bit" Mode="In" />
         </Function>
+        <Function Name="DIBS_Insert_Data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FieldID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Value" Type="decimal" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="CountryID" Type="int" Mode="In" />
+        </Function>
         <Function Name="DIBS_Insert_Unit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Unit" Type="nvarchar" Mode="In" />
         </Function>
-      </Schema>
-    </edmx:StorageModels>
+        <EntityContainer Name="GLOBALEDGE_MVCModelStoreContainer">
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIBS_Fields" EntityType="Self.DIBS_Fields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIBS_Units" EntityType="Self.DIBS_Units" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DIBS_Fields_DIBS_Units" Association="Self.FK_DIBS_Fields_DIBS_Units">
+            <End Role="DIBS_Units" EntitySet="DIBS_Units" />
+            <End Role="DIBS_Fields" EntitySet="DIBS_Fields" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GLOBALEDGE_MVCModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -85,7 +126,14 @@
             <Parameter Name="FieldText" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="DIBS_Insert_Unit" ReturnType="Collection(GLOBALEDGE_MVCModel.DIBS_Insert_Unit_Result)">
-            <Parameter Name="Unit" Mode="In" Type="String" />
+          <Parameter Name="Unit" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Countries" EntityType="GLOBALEDGE_MVCModel.Country" />
+          <FunctionImport Name="DIBS_Insert_Data">
+            <Parameter Name="FieldID" Mode="In" Type="String" />
+            <Parameter Name="Value" Mode="In" Type="Decimal" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="CountryID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="DIBS_Fields">
@@ -110,7 +158,7 @@
             <PropertyRef Name="UnitID" />
           </Key>
           <Property Name="UnitID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Unit" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="450" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="DIBS_Fields" Relationship="GLOBALEDGE_MVCModel.FK_DIBS_Fields_DIBS_Units" FromRole="DIBS_Units" ToRole="DIBS_Fields" />
         </EntityType>
@@ -131,6 +179,41 @@
           <Property Type="String" Name="Unit" Nullable="false" MaxLength="1000" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="4000" />
         </ComplexType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Type="Int32" Name="CountryID" Nullable="false" />
+          <Property Type="Int32" Name="TagID" Nullable="false" />
+          <Property Type="Int32" Name="StatusID" Nullable="false" />
+          <Property Type="String" Name="Abbr" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NameCIA" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="IntroShort" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="IntroLong" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="History" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Economy" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Government" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Capital" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Capital_Lat" Nullable="false" Precision="10" Scale="4" />
+          <Property Type="Decimal" Name="Capital_Long" Nullable="false" Precision="10" Scale="4" />
+          <Property Type="String" Name="Currency" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CurrencyCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CallingCode" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Voltage" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ChiefOfState" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="HeadOfGov" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="USEmbassy" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MainLanguages" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MainReligions" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="zoom" Nullable="false" Precision="10" Scale="3" />
+          <Property Type="Decimal" Name="zoom_x" Nullable="false" Precision="10" Scale="3" />
+          <Property Type="Decimal" Name="zoom_y" Nullable="false" Precision="10" Scale="3" />
+          <Property Type="String" Name="iso2code" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="LastReviewed" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="LocationId" />
+          <Property Type="String" Name="Unrest" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="UnrestApproved" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -173,6 +256,43 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="GLOBALEDGE_MVCModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="UnrestApproved" ColumnName="UnrestApproved" />
+                <ScalarProperty Name="Unrest" ColumnName="Unrest" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="LastReviewed" ColumnName="LastReviewed" />
+                <ScalarProperty Name="iso2code" ColumnName="iso2code" />
+                <ScalarProperty Name="zoom_y" ColumnName="zoom_y" />
+                <ScalarProperty Name="zoom_x" ColumnName="zoom_x" />
+                <ScalarProperty Name="zoom" ColumnName="zoom" />
+                <ScalarProperty Name="MainReligions" ColumnName="MainReligions" />
+                <ScalarProperty Name="MainLanguages" ColumnName="MainLanguages" />
+                <ScalarProperty Name="USEmbassy" ColumnName="USEmbassy" />
+                <ScalarProperty Name="HeadOfGov" ColumnName="HeadOfGov" />
+                <ScalarProperty Name="ChiefOfState" ColumnName="ChiefOfState" />
+                <ScalarProperty Name="Voltage" ColumnName="Voltage" />
+                <ScalarProperty Name="CallingCode" ColumnName="CallingCode" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Capital_Long" ColumnName="Capital_Long" />
+                <ScalarProperty Name="Capital_Lat" ColumnName="Capital_Lat" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Government" ColumnName="Government" />
+                <ScalarProperty Name="Economy" ColumnName="Economy" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="IntroLong" ColumnName="IntroLong" />
+                <ScalarProperty Name="IntroShort" ColumnName="IntroShort" />
+                <ScalarProperty Name="NameCIA" ColumnName="NameCIA" />
+                <ScalarProperty Name="Abbr" ColumnName="Abbr" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DIBS_Insert_Data" FunctionName="GLOBALEDGE_MVCModel.Store.DIBS_Insert_Data" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -190,6 +310,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

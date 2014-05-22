@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="GLOBALEDGE_MVCModel.DIBS_Fields" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="GLOBALEDGE_MVCModel.DIBS_Units" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="GLOBALEDGE_MVCModel.FK_DIBS_Fields_DIBS_Units" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GLOBALEDGE_MVCModel.Country" Width="1.5" PointX="0.52435751842537781" PointY="2.9699294282914743" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.IndicatorID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Indicator = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnValues = new System.Windows.Forms.Button();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // button1
@@ -45,18 +44,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.IndicatorID,
-            this.Indicator});
-            this.listView1.Location = new System.Drawing.Point(48, 48);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(493, 97);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(74, 219);
@@ -66,13 +53,31 @@
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "W";
             // 
+            // btnValues
+            // 
+            this.btnValues.Location = new System.Drawing.Point(608, 93);
+            this.btnValues.Name = "btnValues";
+            this.btnValues.Size = new System.Drawing.Size(103, 23);
+            this.btnValues.TabIndex = 3;
+            this.btnValues.Text = "Get Values";
+            this.btnValues.UseVisualStyleBackColor = true;
+            this.btnValues.Click += new System.EventHandler(this.btnValues_Click);
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Location = new System.Drawing.Point(74, 36);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 562);
+            this.Controls.Add(this.dateTimePicker);
+            this.Controls.Add(this.btnValues);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -85,10 +90,9 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader IndicatorID;
-        private System.Windows.Forms.ColumnHeader Indicator;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnValues;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
     }
 }
 

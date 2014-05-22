@@ -17,7 +17,7 @@ namespace WorldBankDesktop
     {
         public Value indicator { get; set; }
         public Value country { get; set; }
-        public double? value { get; set; }
+        public decimal? value { get; set; }
         [JsonProperty("decimal")]
         public int dec { get; set; }
         public int date { get; set; }
